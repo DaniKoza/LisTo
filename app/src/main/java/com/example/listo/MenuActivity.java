@@ -5,18 +5,34 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 public class MenuActivity extends AppCompatActivity {
     private NoteAnimationView noteAnimationView;
     private Button BTN_join_room, BTN_create_room, BTN_user_manual;
+    private RequestQueue mRequestQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         findViews();
+        mRequestQueue = Volley.newRequestQueue(this);
 
         BTN_user_manual.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -24,7 +40,36 @@ public class MenuActivity extends AppCompatActivity {
                 showHowToUseDialog();
             }
         });
+    }
 
+    // Method that gets song title, cannot be static. later can be added in an async task maybe...
+    private void getTitleWithVideoId(String videoId) {
+        String url = "https://www.googleapis.com/youtube/v3/videos?id=" + videoId + "&key=" +
+                YouTubeConfig.getApiKey() + "&part=snippet";
+        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray jsonArray = response.getJSONArray("items");
+                            JSONObject object = jsonArray.getJSONObject(0);
+                            JSONObject snippet = object.getJSONObject("snippet");
+                            String title = snippet.getString("title");
+                            Log.d("ttd", title);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("Error.Response", "Somthing went wrong");
+                    }
+                }
+        );
+        // add it to the RequestQueue
+        mRequestQueue.add(getRequest);
     }
 
     private void showHowToUseDialog() {
@@ -35,7 +80,7 @@ public class MenuActivity extends AppCompatActivity {
                         "5) Paste the link you've copied and hit the 'Add' button.")
                 // Specifying a listener allows you to take an action before dismissing the dialog.
                 // The dialog is automatically dismissed when a dialog button is clicked.
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                .setPositiveButton("Got it!", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // Understood
                     }
@@ -65,4 +110,6 @@ public class MenuActivity extends AppCompatActivity {
         super.onStop();
         noteAnimationView.pause();
     }
+
+
 }
