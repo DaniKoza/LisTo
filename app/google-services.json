@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "823168166813",
+    "firebase_url": "https://listoo-32747.firebaseio.com",
+    "project_id": "listoo",
+    "storage_bucket": "listoo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:823168166813:android:3e56c536da193bc2351d74",
+        "android_client_info": {
+          "package_name": "com.example.listo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "823168166813-0652a3victm19t1d3b9hir0hd9fseavo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEsjbGtEm--VLKP9tCaEEDZgPw4d7pY2U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "823168166813-0652a3victm19t1d3b9hir0hd9fseavo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
