@@ -11,13 +11,15 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".VerifyPhoneActivity"></activity>
-        <activity android:name=".LogInActivity" />
-        <activity android:name=".GuestActivity" />
-        <activity android:name=".MenuActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".SplashActivity">
+        android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".Activities.VerifyPhoneActivity"></activity>
+        <activity android:name=".Activities.LogInActivity" />
+        <activity android:name=".Activities.GuestActivity" />
+        <activity
+            android:name=".Activities.MenuActivity"/>
+        <activity android:name=".Activities.RoomMasterActivity" />
+
+        <activity android:name=".Activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

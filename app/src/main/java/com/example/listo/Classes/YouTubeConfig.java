@@ -1,4 +1,4 @@
-package com.example.listo;
+package com.example.listo.Classes;
 
 public class YouTubeConfig {
     public YouTubeConfig() {

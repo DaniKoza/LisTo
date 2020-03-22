@@ -1,4 +1,4 @@
-package com.example.listo;
+package com.example.listo.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.listo.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LogInActivity extends AppCompatActivity {
@@ -36,7 +37,7 @@ public class LogInActivity extends AppCompatActivity {
                 String mobile = login_EDT_phone.getText().toString().trim();
 
                 if (mobile.length() != 10) {
-                    login_EDT_phone.setError("הכנס מספר טלפון תקין");
+                    login_EDT_phone.setError("Please enter valid phone number");
                     login_EDT_phone.requestFocus();
                     return;
                 }

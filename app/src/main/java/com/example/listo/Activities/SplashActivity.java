@@ -1,4 +1,4 @@
-package com.example.listo;
+package com.example.listo.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,7 +7,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Toast;
+
+import com.example.listo.R;
 
 public class SplashActivity extends AppCompatActivity {
 

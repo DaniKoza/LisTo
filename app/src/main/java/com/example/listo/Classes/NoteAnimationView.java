@@ -1,4 +1,4 @@
-package com.example.listo;
+package com.example.listo.Classes;
 
 import android.animation.TimeAnimator;
 import android.content.Context;
@@ -7,6 +7,8 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.example.listo.R;
+
 import java.util.Random;
 
 import androidx.core.content.ContextCompat;
@@ -14,7 +16,7 @@ import androidx.core.content.ContextCompat;
 public class NoteAnimationView extends View {
 
     /**
-     * Class representing the state of a dollars
+     * Class representing the state of a noes
      */
     private static class Note {
         private float x;
@@ -25,14 +27,14 @@ public class NoteAnimationView extends View {
     }
 
     private static final int BASE_SPEED_DP_PER_S = 200;
-    private static final int COUNT = 32;
+    private static final int COUNT = 20;
     private static final int SEED = 1337;
 
-    /** The minimum scale of a dollar */
+    /** The minimum scale of a note */
     private static final float SCALE_MIN_PART = 0.45f;
     /** How much of the scale that's based on randomness */
     private static final float SCALE_RANDOM_PART = 0.55f;
-    /** How much of the alpha that's based on the scale of the star */
+    /** How much of the alpha that's based on the scale of the note */
     private static final float ALPHA_SCALE_PART = 0.5f;
     /** How much of the alpha that's based on randomness */
     private static final float ALPHA_RANDOM_PART = 0.5f;
@@ -218,7 +220,7 @@ public class NoteAnimationView extends View {
         note.y += viewHeight * mRnd.nextFloat() / 4f;
 
         // The alpha is determined by the scale of the note and a random multiplier.
-        note.alpha = ALPHA_SCALE_PART * note.scale + ALPHA_RANDOM_PART * mRnd.nextFloat();
+        note.alpha = ALPHA_SCALE_PART * note.scale + ALPHA_RANDOM_PART;
         // The bigger and brighter a note is, the faster it moves
         note.speed = mBaseSpeed * note.alpha * note.scale;
     }

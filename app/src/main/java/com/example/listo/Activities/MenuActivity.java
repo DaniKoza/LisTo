@@ -1,75 +1,43 @@
-package com.example.listo;
+package com.example.listo.Activities;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.example.listo.Classes.NoteAnimationView;
+import com.example.listo.R;
 
 
 public class MenuActivity extends AppCompatActivity {
     private NoteAnimationView noteAnimationView;
-    private Button BTN_join_room, BTN_create_room, BTN_user_manual;
-    private RequestQueue mRequestQueue;
+    private Button BTN_enter_room, BTN_create_room, BTN_user_manual;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         findViews();
-        mRequestQueue = Volley.newRequestQueue(this);
-
         BTN_user_manual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showHowToUseDialog();
             }
         });
-    }
 
-    // Method that gets song title, cannot be static. later can be added in an async task maybe...
-    private void getTitleWithVideoId(String videoId) {
-        String url = "https://www.googleapis.com/youtube/v3/videos?id=" + videoId + "&key=" +
-                YouTubeConfig.getApiKey() + "&part=snippet";
-        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            JSONArray jsonArray = response.getJSONArray("items");
-                            JSONObject object = jsonArray.getJSONObject(0);
-                            JSONObject snippet = object.getJSONObject("snippet");
-                            String title = snippet.getString("title");
-                            Log.d("ttd", title);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("Error.Response", "Somthing went wrong");
-                    }
-                }
-        );
-        // add it to the RequestQueue
-        mRequestQueue.add(getRequest);
+        BTN_enter_room.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mainIntent = new Intent(MenuActivity.this, RoomMasterActivity.class);
+                MenuActivity.this.startActivity(mainIntent);
+            }
+        });
+
     }
 
     private void showHowToUseDialog() {
@@ -94,7 +62,7 @@ public class MenuActivity extends AppCompatActivity {
     private void findViews() {
         noteAnimationView = findViewById(R.id.noteAnimationView);
         noteAnimationView.setVisibility(View.VISIBLE);
-        BTN_join_room = findViewById(R.id.BTN_join_room);
+        BTN_enter_room = findViewById(R.id.BTN_enter_room);
         BTN_create_room = findViewById(R.id.BTN_create_room);
         BTN_user_manual = findViewById(R.id.BTN_user_manual);
     }
